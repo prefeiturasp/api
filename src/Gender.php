@@ -2,7 +2,7 @@
 
 namespace SuperMae;
 
-class Gender
+class Gender implements \JsonSerializable
 {
     const FEMALE = 'F';
     const MALE = 'M';
@@ -12,7 +12,7 @@ class Gender
         Gender::MALE => 'male',
     ];
 
-    public $gender;
+    private $gender;
 
     public function __construct($gender)
     {
@@ -27,4 +27,11 @@ class Gender
     {
         return (string) $this->labels[$this->gender];
     }
+
+    public function jsonSerialize()
+    {
+        return (string) $this;
+    }
+
+
 }

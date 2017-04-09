@@ -2,6 +2,7 @@
 
 namespace SuperMae\Console\Commands;
 
+use SuperMae\Gestations\PelvicPresentation;
 use SuperMae\Silex\Application;
 use SuperMae\Silex\Gestations\Repositories\MongoDb;
 use Symfony\Component\Console\Command\Command;
@@ -99,6 +100,7 @@ class GestationImport extends Command
                     $QTDPARTCES,
                     $QTDPARTNOR,
                     $SEMAGESTAC,
+                    new PelvicPresentation($TPAPRESENT),
                     $TPROBSON
                 );
 

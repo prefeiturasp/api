@@ -2,7 +2,7 @@
 
 namespace SuperMae;
 
-class ChildbirthType
+class ChildbirthType implements \JsonSerializable
 {
     const VAGINAL = 1;
     const CESSION = 2;
@@ -14,7 +14,7 @@ class ChildbirthType
         ChildbirthType::IGNORED => 'ignored',
     ];
 
-    public $type;
+    private $type;
 
     public function __construct($type)
     {
@@ -24,5 +24,10 @@ class ChildbirthType
     public function __toString()
     {
         return (string) $this->labels[$this->type];
+    }
+
+    public function jsonSerialize()
+    {
+        return (string) $this;
     }
 }

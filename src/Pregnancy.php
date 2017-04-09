@@ -2,7 +2,7 @@
 
 namespace SuperMae;
 
-class Pregnancy
+class Pregnancy implements \JsonSerializable
 {
     const UNIQUE = 1;
     const DOUBLE = 2;
@@ -16,7 +16,7 @@ class Pregnancy
         Pregnancy::IGNORED => 'ignored',
     ];
 
-    public $pregnancy;
+    private $pregnancy;
 
     public function __construct($type)
     {
@@ -30,5 +30,10 @@ class Pregnancy
     public function __toString()
     {
         return (string) $this->labels[$this->pregnancy];
+    }
+
+    public function jsonSerialize()
+    {
+        return (string) $this->pregnancy;
     }
 }
