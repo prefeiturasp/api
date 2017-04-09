@@ -6,6 +6,7 @@ use SuperMae\Gestations\Filter;
 use SuperMae\Silex\Gestations\Repositories\MongoDb;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class Controller
 {
@@ -34,6 +35,18 @@ class Controller
     public function status()
     {
         return new JsonResponse(['status' => 'available'], JsonResponse::HTTP_OK);
+    }
+
+    public function options(Request $request)
+    {
+        return new Response(
+            '',
+            JsonResponse::HTTP_OK,
+            [
+                'Access-Control-Allow-Origin' => '*',
+                'Allow' => 'OPTIONS, POST',
+            ]
+        );
     }
 
     public function statistics(Request $request)

@@ -31,6 +31,7 @@ class Provider implements ServiceProviderInterface
     private function registerRoutes(Application $application)
     {
         $application->get('/', [$application['supermae_gestations_controller'], 'status']);
+        $application->options('/gestations', [$application['supermae_gestations_controller'], 'options']);
         $application->post('/gestations', [$application['supermae_gestations_controller'], 'statistics']);
     }
 }

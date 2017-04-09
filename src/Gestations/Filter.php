@@ -23,11 +23,13 @@ class Filter
     public function toArray()
     {
         $filter = [
-            'establishment.name' => new Regex(".*{$this->establishment}.*", 'i'),
             'mother.numberOfWeek' => $this->numberOfWeek,
             'mother.robsonGroup' => $this->robsonGroup,
         ];
 
+        if ($this->establishment) {
+            $filter['establishment.name'] = new Regex(".*{$this->establishment}.*", 'i');
+        }
         if ($this->age->isNotEmpty()) {
             $filter['mother.age'] = [
                 '$gte' => $this->age->start,
