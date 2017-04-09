@@ -12,4 +12,9 @@ class AgeRange
         $this->start = $start;
         $this->end = $end;
     }
+
+    public function isNotEmpty()
+    {
+        return !empty($this->start) && !empty($this->end);
+    }
 }

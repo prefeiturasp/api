@@ -33,7 +33,7 @@ class Mother implements \JsonSerializable
     /**
      * @var
      */
-    public $robsonClassification;
+    public $robsonGroup;
 
     public function __construct(
         $age,
@@ -42,14 +42,14 @@ class Mother implements \JsonSerializable
         $totalVaginal,
         $numberOfWeek,
         PelvicPresentation $pelvicPresentation,
-        $robsonClassification
+        $robsonGroup
     ) {
         $this->age = (int) $age;
         $this->pregnancy = $pregnancy;
         $this->totalCession = (int) $totalCession;
         $this->totalVaginal = (int) $totalVaginal;
         $this->numberOfWeek = (int) $numberOfWeek;
-        $this->robsonClassification = (int) $robsonClassification;
+        $this->robsonGroup = (int) $robsonGroup;
         $this->pelvicPresentation = $pelvicPresentation;
     }
 

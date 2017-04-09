@@ -46,7 +46,8 @@ class Controller
                     $request->request->get('age_to', $age)
                 ),
                 $request->request->get('unit'),
-                $request->request->get('week')
+                $request->request->get('week'),
+                $request->request->get('robson_group')
             )
         );
 

@@ -7,6 +7,6 @@ class Robson
     public function calculate(Mother $mother)
     {
 
-        return $mother->robsonClassification;
+        return $mother->robsonGroup;
     }
 }

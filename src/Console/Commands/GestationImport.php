@@ -94,6 +94,12 @@ class GestationImport extends Command
                 $STCESPARTO = $data[20];
                 $TPROBSON = $data[21];
 
+                $establishment = $this->findOneEstablishment($input, $CODESTAB);
+
+                if (!$establishment) {
+                    continue;
+                }
+
                 $mother = new Mother(
                     $IDADEMAE,
                     new Pregnancy($GRAVIDEZ),
@@ -103,12 +109,6 @@ class GestationImport extends Command
                     new PelvicPresentation($TPAPRESENT),
                     $TPROBSON
                 );
-
-                $establishment = $this->findOneEstablishment($input, $CODESTAB);
-
-                if (!$establishment) {
-                    continue;
-                }
 
                 $gestation = new Gestation(
                     $establishment,
