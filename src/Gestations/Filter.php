@@ -2,15 +2,17 @@
 
 namespace SuperMae\Gestations;
 
+use SuperMae\Gestations\Filter\AgeRange;
+
 class Filter
 {
     public $age;
     public $establishment;
     public $numberOfWeek;
 
-    public function __construct($age, $establishment, $numberOfWeek)
+    public function __construct(AgeRange $ageRange, $establishment, $numberOfWeek)
     {
-        $this->age = $age;
+        $this->age = $ageRange;
         $this->establishment = $establishment;
         $this->numberOfWeek = $numberOfWeek;
     }
@@ -18,10 +20,14 @@ class Filter
     public function toArray()
     {
         $filter = [
-            'mother.age' => $this->age,
+            'mother.age' => [
+                '$gte' => $this->age->start,
+                '$lte' => $this->age->end
+            ],
             'establishment.id' => $this->establishment,
             'mother.numberOfWeek' => $this->numberOfWeek,
         ];
+
         return array_filter($filter, function ($item) {
             return !empty($item);
         });
@@ -29,6 +35,8 @@ class Filter
 
     public function isNotEmpty()
     {
-        return new static(null, null, null) != $this;
+        $empty = new static(new AgeRange(null, null), null, null);
+
+        return $empty != $this;
     }
 }

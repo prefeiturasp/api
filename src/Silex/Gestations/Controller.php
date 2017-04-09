@@ -38,9 +38,13 @@ class Controller
 
     public function statistics(Request $request)
     {
+        $age = $request->request->get('age');
         $statistics = $this->service->statistics(
             new Filter(
-                $request->request->get('age'),
+                new Filter\AgeRange(
+                    $request->request->get('age_from', $age),
+                    $request->request->get('age_to', $age)
+                ),
                 $request->request->get('unit'),
                 $request->request->get('week')
             )
