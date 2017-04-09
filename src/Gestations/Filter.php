@@ -2,6 +2,7 @@
 
 namespace SuperMae\Gestations;
 
+use MongoDB\BSON\Regex;
 use SuperMae\Gestations\Filter\AgeRange;
 
 class Filter
@@ -22,7 +23,7 @@ class Filter
     public function toArray()
     {
         $filter = [
-            'establishment.id' => $this->establishment,
+            'establishment.name' => new Regex(".*{$this->establishment}.*", 'i'),
             'mother.numberOfWeek' => $this->numberOfWeek,
             'mother.robsonGroup' => $this->robsonGroup,
         ];
