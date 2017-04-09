@@ -1,0 +1,16 @@
+---
+- hosts: all
+  vars_files:
+    - vars/application.yml
+    - vars/requirements.yml
+    - vars/deploy.yml
+  roles:
+    - carlosbuenosvinos.ansistrano-deploy
+  tasks:
+    - name: "APP : Correct Owner"
+      file:
+        path={{ ansistrano_release_path.stdout }}
+        owner=www-data
+        group=www-data
+        mode=0755
+        recurse=yes

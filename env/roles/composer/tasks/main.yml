@@ -1,0 +1,19 @@
+- name: Set php_executable variable to a default if not defined.
+  set_fact:
+    php_executable: php
+  when: php_executable is not defined
+
+- name: Check if it is installed
+  stat: "path={{ composer_path }}"
+  register: composer_bin
+
+- name: Install if not exists
+  include: install.yml
+  when: not composer_bin.stat.exists
+
+- name: Update to latest version (if configured).
+  shell: >
+    {{ php_executable }} {{ composer_path }} self-update
+  register: composer_update
+  changed_when: "'Updating to version' in composer_update.stdout"
+  when: composer_keep_updated and composer_bin.stat.exists

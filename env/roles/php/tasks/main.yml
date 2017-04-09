@@ -1,0 +1,24 @@
+---
+- name: Add ppa Repository
+  apt_repository: repo=ppa:ondrej/{{ php.ppa }}
+
+- name: Update apt
+  apt: update_cache=yes
+
+- name: Install php{{ php.version }}
+  apt: pkg=php state=latest
+
+- name: Install php-fpm
+  apt: pkg=php-fpm state=latest
+
+- name: Install PHP Packages
+  apt: pkg={{ item }} state=latest
+  with_items: php.packages
+  when: php.packages is defined
+
+- name: including INI Files
+  include: configure.yml
+
+- name: including Pecl Packages
+  include: pecl.yml
+  when: php.pecl_packages is defined

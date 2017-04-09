@@ -1,0 +1,27 @@
+---
+server:
+    packages: [htop, git-core]
+    timezone: America/Sao_Paulo
+    locale: en_US.UTF-8
+php:
+    ppa: php
+    version: "7.1"
+    packages: [php-cli, php-fpm, php-mongodb, php-mbstring, php-zip]
+    settings:
+        ini:
+            - { option: 'date.timezone', value: 'America/Sao_Paulo' }
+            - { option: 'memory_limit', value: -1 }
+            - { option: 'display_errors', value: 'Off' }
+            - { option: 'error_reporting', value: 'E_ERROR' }
+            - { option: 'short_open_tag', value: 'Off' }
+            - { option: 'upload_max_filesize', value: '8M' }
+            - { option: 'post_max_size', value: '8M' }
+            - { option: 'opcache.enable', value: '1' }
+        fpm_pool:
+            - { option: 'user', value: 'www-data'}
+            - { option: 'group', value: 'www-data'}
+            - { option: 'listen.owner', value: 'www-data'}
+            - { option: 'listen.group', value: 'www-data'}
+            - { option: 'listen.mode', value: '0660'}
+
+mongodb_conf_bind_ip: 0.0.0.0

@@ -1,0 +1,10 @@
+---
+- name: "APP : Reload NGiNX"
+  service:
+    name: nginx
+    state: reloaded
+
+- name: "APP : Reload PHP-FPM"
+  service:
+    name: "php{{php.version}}-fpm"
+    state: reloaded

@@ -1,0 +1,5 @@
+---
+app:
+    base_path: /var/www/supermae
+    vhost:
+        server_name: "{{ server_name | default('supermae.dev')}}"

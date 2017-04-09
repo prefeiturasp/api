@@ -1,0 +1,20 @@
+---
+- name: Install Nginx
+  apt: pkg=nginx state=latest
+
+- name: Create VHost
+  template: >
+    src="vhost.tpl"
+    dest="/etc/nginx/sites-available/supermae.conf"
+  when: app.vhost is defined
+
+- name: Enable VHost
+  file:
+    src: "/etc/nginx/sites-available/{{ item }}.conf"
+    dest: "/etc/nginx/sites-enabled/{{ item }}.conf"
+    state: link
+  when: app.vhost is defined
+  with_items:
+    - supermae
+  notify:
+    - nginx-restart

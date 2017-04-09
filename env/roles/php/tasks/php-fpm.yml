@@ -1,0 +1,20 @@
+---
+- name: php ini settings for PHP-FPM
+  ini_file: dest=/etc/php/{{php.version}}/fpm/php.ini
+            section=PHP
+            option={{ item.option }}
+            value={{ item.value }}
+            backup=yes
+  notify: php-fpm-restart
+  with_items: php.settings.ini
+  when: php.settings.ini is defined
+
+- name: php www.conf settings for PHP-FPM
+  ini_file: dest=/etc/php/{{php.version}}/fpm/pool.d/www.conf
+            section=www
+            option={{ item.option }}
+            value={{ item.value }}
+            backup=yes
+  notify: php-fpm-restart
+  with_items: php.settings.fpm_pool
+  when: php.settings.fpm_pool is defined

@@ -1,0 +1,10 @@
+---
+- name: php ini settings for PHP-Cli
+  ini_file: dest=/etc/php/{{php.version}}/cli/php.ini
+            section=PHP
+            option={{ item.option }}
+            value={{ item.value }}
+            backup=yes
+  notify: php-fpm-restart
+  with_items: php.settings.ini
+  when: php.settings.ini is defined

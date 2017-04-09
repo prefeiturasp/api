@@ -1,0 +1,10 @@
+---
+- hosts: webservers
+  vars_files:
+    - vars/application.yml
+    - vars/requirements.yml
+  roles:
+    - server
+    - nginx
+    - php
+    - composer

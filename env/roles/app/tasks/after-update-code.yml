@@ -1,0 +1,11 @@
+---
+- name: "APP : Install Composer Dependencies"
+  composer:
+    command: install
+    no_dev: yes
+    working_dir: "{{ ansistrano_release_path.stdout }}"
+
+- name: "APP : Configuration"
+  template: >
+    src="roles/app/templates/config.tpl"
+    dest="{{ ansistrano_release_path.stdout }}/config/prod.php"
