@@ -1,0 +1,15 @@
+#!/usr/bin/env php
+<?php
+require_once __DIR__ . '/../vendor/autoload.php';
+set_time_limit(0);
+use Symfony\Component\Console\Input\ArgvInput;
+
+$input = new ArgvInput();
+$env = $input->getParameterOption(array('--env', '-e'), getenv('SYMFONY_ENV') ?: 'dev');
+
+$configuration = require __DIR__ . "/../config/{$env}.php";
+$app = require __DIR__ . '/../app.php';
+
+$console = new \Symfony\Component\Console\Application('SuperMãe Console');
+$console->add(new \SuperMae\Console\Commands\GestationImport($app));
+$console->run();

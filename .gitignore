@@ -1,0 +1,11 @@
+.idea/
+.vagrant/
+config/prod.php
+config/dev.php
+build/
+vendor/
+var/
+!var/.gitkeep
+!var/logs/.gitkeep
+dbhosts
+webhosts
